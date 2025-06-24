@@ -68,10 +68,6 @@ MIDDLEWARE = [
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-CORS_ALLOWED_ORIGINS = [
-    "https://user-service-grammar-azi.onrender.com",
-    "http://localhost:8000",  # local test üçün
-]
 
 ROOT_URLCONF = 'auth_service.urls'
 
