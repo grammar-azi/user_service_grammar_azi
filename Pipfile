@@ -19,6 +19,7 @@ pytest-django = "*"
 django-celery-email = "*"
 drf-yasg = "*"
 pytest-mock = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 

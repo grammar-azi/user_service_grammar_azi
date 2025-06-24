@@ -49,12 +49,14 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
+    "corsheaders",
 
     # Apps
     "users",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -62,6 +64,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "https://user-service-grammar-azi.onrender.com",
+    "http://localhost:8000",  # local test üçün
 ]
 
 ROOT_URLCONF = 'auth_service.urls'
@@ -181,5 +190,6 @@ SWAGGER_SETTINGS = {
             "in": "header",
         }
     },
-    "USE_SESSION_AUTH": False,  
+    "USE_SESSION_AUTH": False,
+    "DEFAULT_API_URL": "https://user-service-grammar-azi.onrender.com/",
 }
