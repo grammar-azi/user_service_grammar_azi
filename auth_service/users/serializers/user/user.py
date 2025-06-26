@@ -29,11 +29,13 @@ class UpdateProfileSerializer(serializers.ModelSerializer):
     """
     first_name = serializers.CharField(
         max_length=30, 
-        required=False
+        required=False,
+        allow_blank=True
     )
     last_name = serializers.CharField(
         max_length=30, 
-        required=False
+        required=False,
+        allow_blank=True
     )
     bio = serializers.CharField(
         max_length=500, 
