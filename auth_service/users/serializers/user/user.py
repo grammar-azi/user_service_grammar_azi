@@ -14,11 +14,13 @@ class UserSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = [
             "email", 
+            "first_name", 
+            "last_name",
             "bio", 
             "profile_picture", 
             "slug", 
         ]
-
+   
 
 class UpdateProfileSerializer(serializers.ModelSerializer):
     """
