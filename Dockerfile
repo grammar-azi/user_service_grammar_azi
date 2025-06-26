@@ -11,7 +11,9 @@ COPY ./auth_service /app
 
 COPY create_superuser.py /app/
 
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "python manage.py makemigrations && python manage.py migrate --noinput && python create_superuser.py && python manage.py runserver 0.0.0.0:8000"]
+CMD ["./start.sh"]
