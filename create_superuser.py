@@ -7,8 +7,8 @@ django.setup()
 
 User = get_user_model()
 
-email = os.getenv('DJANGO_SUPERUSER_EMAIL', 'admin@example.com')
-password = os.getenv('DJANGO_SUPERUSER_PASSWORD', 'adminpass')
+email = os.getenv("DJANGO_SUPERUSER_EMAIL", "admin@example.com")
+password = os.getenv("DJANGO_SUPERUSER_PASSWORD", "adminpass")
 
 if not User.objects.filter(email=email).exists():
     User.objects.create_superuser(email=email, password=password)
