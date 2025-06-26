@@ -4,7 +4,7 @@ from users.views import *
 urlpatterns = [
     # User endpoints
     path(
-        "users/<slug:username>/", 
+        "users/me/", 
         UserProfileView.as_view(), 
         name="user-profile"
     ),

@@ -10,6 +10,7 @@ from drf_yasg import openapi
 from users.models import CustomUser
 from users.serializers import UserSerializer, UpdateProfileSerializer
 
+
 __all__ = [
     "UserProfileView",
     "UpdateProfileView"
@@ -21,39 +22,28 @@ logger = logging.getLogger(__name__)
 
 class UserProfileView(APIView):
     """
-    API view to retrieve user profile details.
-    
-    This view is accessible only to authenticated users. It fetches the user's profile based
-    on the provided username (slug) and returns the user data.
+    API view to retrieve the authenticated user's profile.
+
+    This view is accessible only to authenticated users. It returns the profile
+    data of the user based on their JWT authentication token.
     """
     permission_classes = [IsAuthenticated]
-    
+
     @swagger_auto_schema(
         tags=["Profile"],
-        operation_summary="Get user profile",
-        operation_description="Returns the profile information of the user identified by username (slug).",
+        operation_summary="Get your own profile",
+        operation_description="Returns the profile information of the currently authenticated user.",
         responses={
             200: openapi.Response(
                 description="User profile retrieved successfully",
                 schema=UserSerializer
             ),
-            404: openapi.Response(description="User not found")
+            401: openapi.Response(description="Authentication credentials were not provided or invalid")
         }
     )
-    def get(self, request, username: str, *args, **kwargs) -> Response:
-        """
-        Retrieves the profile of a user by username.
-
-        Args:
-            request: The HTTP request.
-            username (str): The username (slug) of the user whose profile is being fetched.
-
-        Returns:
-            Response: The serialized user data, or an error if the user is not found.
-        """
-        user = get_object_or_404(CustomUser, slug=username)
+    def get(self, request, *args, **kwargs):
+        user = request.user
         serializer = UserSerializer(user)
-        logger.info(f"Fetched profile for user: {username}")
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 
