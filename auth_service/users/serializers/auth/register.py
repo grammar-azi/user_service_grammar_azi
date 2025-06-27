@@ -19,12 +19,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         min_length=6, 
         max_length=6
     )
-    first_name = serializers.CharField(
-        max_length=30
-    )
-    last_name = serializers.CharField(
-        max_length=30
-    )
     password = serializers.CharField(
         write_only=True
     )   
