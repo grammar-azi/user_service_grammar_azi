@@ -8,17 +8,13 @@ from utils.slug_manager import generate_unique_slug
 
 class CustomUser(AbstractUser):
     """
-    Custom user model that uses email as the unique identifier, 
-    and also uses a unique username for profile display.
+    Custom user model that uses email as the unique identifier instead of username.
     """
 
-    username = models.CharField(
-        max_length=150,
-        unique=True,           
-    )
+    username = None
     email = models.EmailField(
         _("email address"),
-        unique=True            
+        unique=True
     )
     profile_picture = models.ImageField(
         upload_to="profile_pictures/",
@@ -38,15 +34,24 @@ class CustomUser(AbstractUser):
     )
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username"]
+    REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """
+        Returns the string representation of the user.
+        """
         return self.email
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
+        """
+        Generates a unique slug for the user if it's not set.
+        Uses the full name if available, otherwise derives from the email.
+        """
         if not self.slug:
-            base = self.username or self.email.split("@")[0]
-            self.slug = generate_unique_slug(base, CustomUser)
+            full_name = f"{self.first_name} {self.last_name}".strip()
+            if not full_name:
+                full_name = self.email.split("@")[0]
+            self.slug = generate_unique_slug(full_name, CustomUser)
         super().save(*args, **kwargs)
