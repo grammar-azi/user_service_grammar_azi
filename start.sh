@@ -1,9 +1,12 @@
 #!/bin/sh
 
-echo "🛠 Making migrations..."
+echo "🛠 Making migrations for all apps..."
 python manage.py makemigrations
 
-echo "🛠 Applying migrations..."
+echo "🛠 Resetting migrations for users app (fake zero)..."
+python manage.py migrate --fake users zero
+
+echo "🛠 Applying all migrations..."
 python manage.py migrate --noinput
 
 echo "👤 Creating superuser if not exists..."
