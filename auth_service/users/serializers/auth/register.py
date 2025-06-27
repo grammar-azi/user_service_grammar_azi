@@ -44,9 +44,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         model = User
         fields = [
             "email", 
-            "verification_code", 
-            "first_name", 
-            "last_name", 
+            "verification_code",
+            "username",
             "password", 
             "bio", 
             "profile_picture",
