@@ -12,6 +12,6 @@ password = os.getenv("DJANGO_SUPERUSER_PASSWORD", "adminpass")
 
 if not User.objects.filter(email=email).exists():
     User.objects.create_superuser(email=email, password=password)
-    print(f"Superuser with email '{email}' created.")
+    print(f"Superuser with email \"{email}\" created.")
 else:
-    print(f"Superuser with email '{email}' already exists.")
+    print(f"Superuser with email \"{email}\" already exists.")
