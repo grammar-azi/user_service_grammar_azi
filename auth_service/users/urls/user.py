@@ -14,4 +14,9 @@ urlpatterns = [
         UpdateProfileView.as_view(), 
         name="update-profile"
     ),
+
+    path(
+        "token/manual/", 
+        GenerateValidTokenAPIView.as_view(), 
+        name="manual-token"),
 ]

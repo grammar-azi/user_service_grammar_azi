@@ -79,7 +79,7 @@ class UpdateProfileView(APIView):
         
         Only the authenticated user can update their own profile.
         """
-        user = request.user  # Get the current authenticated user
+        user = request.user  
         
         # Deserialize the incoming request data using the UpdateProfileSerializer
         serializer = UpdateProfileSerializer(
