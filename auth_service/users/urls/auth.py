@@ -1,5 +1,8 @@
 from django.urls import path
 from users.views import *
+from rest_framework_simplejwt.views import TokenRefreshView
+
+
 
 urlpatterns = [
     # Auth endpoints
@@ -19,5 +22,17 @@ urlpatterns = [
         "users/logout/", 
         LogoutView.as_view(), 
         name="logout"
+    ),
+
+    path(
+        "token/", 
+        CustomTokenObtainPairView.as_view(), 
+        name="token_obtain_pair"
+    ),
+    
+    path(
+        "token/refresh/", 
+        TokenRefreshView.as_view(), 
+        name="token_refresh"
     ),
 ]
